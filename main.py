@@ -1,8 +1,14 @@
-def dodaj(a, b):
-    return a + b
+from flask import Flask
 
-def odejmij(a,b):
-    return a + b
+app = Flask(__name__)
 
-print(dodaj(2,3))
-print(odejmij(3,2))
+@app.route('/hello/<name>')
+def hello_name(name):
+    return 'Hello %s:' % name
+
+@app.route('/')
+def hello_world():
+    return 'Hello World'
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
