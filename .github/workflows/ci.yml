@@ -6,11 +6,21 @@ on:
   pull_request:
     branches: ["main"]
 
+
 jobs:
-  build:
+  test_on_pr:
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - name: Pull repo
         uses: actions/checkout@v4
-      - name: hello
-        run: echo "Hello, world!"
+      - name: Container test on PR
+        run: echo "Test on PR"
+  test_on_merge:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull repo
+        uses: actions/checkout@v4
+      - name: Container test on merge
+        run: echo "Test on merge"
